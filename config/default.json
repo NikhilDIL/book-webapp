@@ -1,0 +1,4 @@
+{
+    "jwtPrivateKey": "",
+    "mongoURI": "mongodb+srv://nikhild:<password>@bookwebapp.sbi86.mongodb.net/bookdb?retryWrites=true&w=majority"
+}
