@@ -32,7 +32,7 @@ router.post('/', [
         user.password = await bcrypt.hash(password, salt);
         await user.save();
 
-        const token = jwt.sign({user: {id: user.id}}, config.get('jwtPrivateKey'));
+        const token = jwt.sign({user: {id: user._id}}, config.get('jwtPrivateKey'));
         res.json(token);
 
     } catch(err) {
