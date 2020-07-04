@@ -1,0 +1,34 @@
+{
+  "name": "book-webapp",
+  "version": "1.0.0",
+  "description": "A application to find new books to read and keep track of books you have read and wish to read in the future",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikhilDIL/book-webapp.git"
+  },
+  "author": "Nikhil Deenamsetty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NikhilDIL/book-webapp/issues"
+  },
+  "homepage": "https://github.com/NikhilDIL/book-webapp#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "concurrently": "^5.2.0",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.21"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
