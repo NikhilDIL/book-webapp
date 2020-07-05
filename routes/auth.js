@@ -27,7 +27,7 @@ router.post('/', [
         if(!isMatch) {
             return res.status(400).json({msg: 'invalid credentials'});
         }
-        const token = jwt.sign({user: {id: user._id}}, config.get('jwtPrivateKey'));
+        const token = jwt.sign({user: {id: user._id}}, process.env.book_jwtPrivateKey);
         res.json(token);
     } catch (err) {
         console.error(err.message);

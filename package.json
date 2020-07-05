@@ -30,7 +30,7 @@
     "mongoose": "^5.9.21"
   },
   "devDependencies": {
-    "jest": "^26.1.0",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
