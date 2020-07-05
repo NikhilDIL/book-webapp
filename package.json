@@ -7,7 +7,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "jest --watchAll --detectOpenHandles --runInBand"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
     "mongoose": "^5.9.21"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   }
 }
