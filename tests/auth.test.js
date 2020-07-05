@@ -58,7 +58,7 @@ describe('/api/users', () => {
             });
             expect(res.status).toBe(200);
             const decoded = jwt.verify(res.body, config.get('jwtPrivateKey'));
-            expect(decoded).toHaveProperty('user');
+            expect(decoded).toHaveProperty('id');
         });
     })
 
