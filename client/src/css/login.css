@@ -1,0 +1,50 @@
+.login-box {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 25%;
+    height: 40vh;
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);;
+}
+
+.login-box h1 {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    font-size: 3vw;
+}
+
+.login-button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.login-button input {
+    width: 70%;
+}
+
+.login-inputs {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.login-inputs input {
+    width: 70%;
+}
+
+.login-imgbg {
+    background-image: url(../images/books.jpg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.test label {
+    display: block;
+}
