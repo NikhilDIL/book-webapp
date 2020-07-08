@@ -1,0 +1,7 @@
+.nav-style .navbar-brand {
+    color: white;
+}
+
+.nav-style .navbar-brand:hover {
+    color: rgb(32, 145, 211);
+}
