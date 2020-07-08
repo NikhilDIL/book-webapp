@@ -1,0 +1,37 @@
+.register-box {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 25%;
+    height: 50vh;
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);;
+}
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.register-form h1 {
+    font-weight: bold;
+    font-size: 2vw;
+}
+
+.register-form .link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.register-form input {
+    width: 20vw;
+}
+
+.register-button input {
+    width:20vw;
+}
