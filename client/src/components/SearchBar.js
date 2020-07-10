@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { BooksContext } from '../contexts/BooksContext';
 
 const SearchBar = () => {
+    const { searchBooks } = useContext(BooksContext);
     const [text, setText] = useState('');
 
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(text);
+        searchBooks(); // pass in parameter here
         setText('');
     }
 
