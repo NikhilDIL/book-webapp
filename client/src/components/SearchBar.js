@@ -1,27 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BooksContext } from '../contexts/BooksContext';
 
 const SearchBar = () => {
-    const { searchBooks } = useContext(BooksContext);
-    const [text, setText] = useState('');
+    const { state: {searchQuery}, searchBooks, setSearchQuery, setIndex} = useContext(BooksContext);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(text);
-        searchBooks(); // pass in parameter here
-        setText('');
+        await searchBooks(); // pass in parameter here
+        setIndex(0);
+        setSearchQuery('');
     }
 
     const onChange = (e) => {
-        setText(e.target.value);
+        setSearchQuery(e.target.value);
     }
     return (
         <div className="container mt-3">
             <form onSubmit={onSubmit}>
                 <input type="text"
-                name="text"
+                name="searchQuery"
                 placeholder="Search Books..."
-                value={text}
+                value={searchQuery}
                 className="btn-block p-1"
                 onChange={onChange}>
                 </input>
@@ -30,7 +29,6 @@ const SearchBar = () => {
                 className="btn btn-dark btn-block">
                 </input>
             </form>
-            
         </div>
     );
 }

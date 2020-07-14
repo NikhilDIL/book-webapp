@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import BookInfo from '../components/BookInfo';
+import { BooksContext } from '../contexts/BooksContext';
+import '../css/books.css';
 
 const Books = ({ books }) => {
+    const { state: {currentIndex}} = useContext(BooksContext);
     return (
-        <div className="container" 
-            style={{display: "grid",
-                    gridTemplateColumns: "repeat(4, 1fr)",
-                    gap: "1rem"}}>
-            {books.map(book => <BookInfo key={book.id} book={book}/>)}
+        <div className="container books-grid">
+            {books.slice(currentIndex, currentIndex+8).map(book => <BookInfo key={book.id} book={book}/>)}
         </div>
     );
 }
