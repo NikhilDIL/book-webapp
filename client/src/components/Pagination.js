@@ -2,7 +2,7 @@ import React, {Fragment, useContext } from 'react';
 import { BooksContext } from '../contexts/BooksContext';
 
 const Pagination = () => {
-     const { state: {books, currentIndex}, setIndex } = useContext(BooksContext);
+    const { state: {books, currentIndex}, setIndex } = useContext(BooksContext);
 
     const leftClick = (e) => {
         currentIndex !== 0 ? setIndex(currentIndex-8) : setIndex(0);

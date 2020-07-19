@@ -15,6 +15,16 @@ export const booksReducer = (state, action) => {
             ...state,
             searchQuery: action.payload
           }
+        case 'GET_BOOK':
+          return {
+            ...state,
+            book: action.payload
+          }
+        case 'CLEAR_BOOK':
+          return {
+            ...state,
+            book: {}
+          }
         default:
           return state;
     }

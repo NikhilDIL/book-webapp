@@ -25,7 +25,7 @@ const Register = () => {
         });
     }
 
-    return (
+    return ( // MODIFY TO ADD USERNAME
         <div className="login-imgbg">
             <h1 className="pt-5" style={{textAlign:"center", fontSize: "7vw"}}>My Book List</h1>
             <div className="register-box">

@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const router = express.Router();
 
+
 // register new user
 router.post('/', [
     check('username', 'Please enter a username').not().isEmpty(),
@@ -40,6 +41,5 @@ router.post('/', [
         res.status(500).send('Server error');
     }
 });
-
 
 module.exports = router;
