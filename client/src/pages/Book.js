@@ -12,8 +12,6 @@ const Book = ({ match }) => {
     }, []);
 
     const { volumeInfo } = book;
-    console.log(volumeInfo);
-    console.log('book', book);
 
     if (!volumeInfo) {
         return <div/>

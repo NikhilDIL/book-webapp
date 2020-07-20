@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 import '../css/login.css'
 
 const Login = () => {
+    const authContext = useContext(AuthContext);
+    const { loginUser } = authContext;
+
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: ''
@@ -15,8 +19,10 @@ const Login = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // contactContext.addContact(contact)
-        console.log(loginInfo);
+        loginUser({
+            email,
+            password
+        });
         setLoginInfo({
             email: '',
             password: ''

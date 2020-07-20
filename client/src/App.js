@@ -6,20 +6,28 @@ import Main from './pages/Main';
 import Account from './pages/Account';
 import Book from './pages/Book';
 import BooksState from './contexts/BooksContext';
+import AuthState from './contexts/AuthContext';
+import setAuthToken from './setAuthToken';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
   return (
-    <BooksState>
-      <Router>
-        <Switch>
-          <Route exact path='/' component={Login}/>
-          <Route exact path='/register' component={Register}/>
-          <Route exact path='/main' component={Main}/>
-          <Route exact path='/account' component={Account}/>
-          <Route exact path='/book/:id' component={Book}/>
-        </Switch>
-      </Router>
-    </BooksState>
+    <AuthState>
+      <BooksState>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Login}/>
+            <Route exact path='/register' component={Register}/>
+            <Route exact path='/main' component={Main}/>
+            <Route exact path='/account' component={Account}/>
+            <Route exact path='/book/:id' component={Book}/>
+          </Switch>
+        </Router>
+      </BooksState>
+    </AuthState>
   );
 }
 

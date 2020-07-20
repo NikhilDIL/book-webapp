@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 import '../css/register.css';
 
 const Register = () => {
+    const authContext = useContext(AuthContext);
     const [registerInfo, setRegisterInfo] = useState({
+        username: '',
         email: '',
         password: '',
         confirmPassword: ''
     });
 
-    const { email, password, confirmPassword } = registerInfo;
+    const { username, email, password, confirmPassword } = registerInfo;
+    const { registerUser } =  authContext;
 
     const onChange = (e) => {
         setRegisterInfo({...registerInfo, [e.target.name]: e.target.value});
@@ -17,8 +21,14 @@ const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(registerInfo);
+        // add password == confirmPassword check
+        registerUser({
+            username,
+            email,
+            password
+        })
         setRegisterInfo({
+            username: '',
             email: '',
             password: '',
             confirmPassword: ''
@@ -31,11 +41,18 @@ const Register = () => {
             <div className="register-box">
                 <form className="register-form" onSubmit={onSubmit}>
                     <h1 className="mt-4">CREATE ACCOUNT</h1>
+                        <input type="text"
+                            placeholder="Username"
+                            name="username"
+                            value={username} 
+                            className="mt-3 mb-4"
+                            onChange={onChange}
+                        />
                         <input type="email" 
                             placeholder="Email"
                             name="email"
                             value={email} 
-                            className="mt-3 mb-4"
+                            className="mb-4"
                             onChange={onChange}
                         />
                         <input type="password" 

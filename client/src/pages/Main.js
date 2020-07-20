@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Navbar from'../components/Navbar';
 import SearchBar from '../components/SearchBar';
 import Books from '../components/Books';
 import Pagination from '../components/Pagination';
 import { BooksContext } from '../contexts/BooksContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Main = () => {
+    const { loadUser } = useContext(AuthContext);
     const { state } = useContext(BooksContext);
+    
+    useEffect(() => {
+        loadUser();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <div>
             <Navbar/>
