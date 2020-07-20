@@ -1,11 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import '../css/login.css'
 
-const Login = () => {
+const Login = (props) => {
     const authContext = useContext(AuthContext);
-    const { loginUser } = authContext;
+    const { loginUser, loadUser, state: { isAuthenticated } } = authContext;
+
+    useEffect(() => {
+        if (localStorage.token) {
+            loadUser();
+        }
+
+        if (isAuthenticated) {
+            props.history.push('/main');
+        }
+        // eslint-disable-next-line
+    }, [isAuthenticated, props.history]);
 
     const [loginInfo, setLoginInfo] = useState({
         email: '',

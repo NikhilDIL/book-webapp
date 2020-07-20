@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import '../css/register.css';
 
-const Register = () => {
+const Register = (props) => {
     const authContext = useContext(AuthContext);
     const [registerInfo, setRegisterInfo] = useState({
         username: '',
@@ -13,7 +13,15 @@ const Register = () => {
     });
 
     const { username, email, password, confirmPassword } = registerInfo;
-    const { registerUser } =  authContext;
+    const { registerUser, loadUser, state: { isAuthenticated } } =  authContext;
+
+    useEffect(() => {
+        loadUser();
+        if (isAuthenticated) {
+            props.history.push('/main');
+        }
+        // eslint-disable-next-line
+    }, [isAuthenticated, props.history]);
 
     const onChange = (e) => {
         setRegisterInfo({...registerInfo, [e.target.name]: e.target.value});
@@ -21,6 +29,7 @@ const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        
         // add password == confirmPassword check
         registerUser({
             username,

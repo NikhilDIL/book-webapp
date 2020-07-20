@@ -8,7 +8,7 @@ export const AuthContext = createContext();
 const AuthState = (props) => {
     const [state, dispatch] = useReducer(authReducer, {
         token: localStorage.getItem('token'),
-        isAuthenticated: null,
+        isAuthenticated: false,
         user: null,
         error: null
     });
@@ -30,7 +30,7 @@ const AuthState = (props) => {
         }
     }
 
-    const logout = () => dispatch({type: 'LOGOUT'});
+    const logoutUser = () => dispatch({type: 'LOGOUT'});
 
     const registerUser = async data => {
         try {
@@ -65,7 +65,7 @@ const AuthState = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logout }}>
+        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser }}>
           {props.children}
         </AuthContext.Provider>
     );
