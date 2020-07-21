@@ -23,8 +23,8 @@ const App = () => {
             <Route exact path='/' component={Login}/>
             <Route exact path='/register' component={Register}/>
             <ProtectedRoute exact path='/main' component={Main}/>
-            <Route exact path='/account' component={Account}/>
-            <Route exact path='/book/:id' component={Book}/>
+            <ProtectedRoute exact path='/account' component={Account}/>
+            <ProtectedRoute exact path='/book/:id' component={Book}/>
           </Switch>
         </Router>
       </BooksState>
