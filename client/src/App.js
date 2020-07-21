@@ -8,6 +8,7 @@ import Book from './pages/Book';
 import BooksState from './contexts/BooksContext';
 import AuthState from './contexts/AuthContext';
 import setAuthToken from './setAuthToken';
+import ProtectedRoute from './ProtectedRoute';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -21,7 +22,7 @@ const App = () => {
           <Switch>
             <Route exact path='/' component={Login}/>
             <Route exact path='/register' component={Register}/>
-            <Route exact path='/main' component={Main}/>
+            <ProtectedRoute exact path='/main' component={Main}/>
             <Route exact path='/account' component={Account}/>
             <Route exact path='/book/:id' component={Book}/>
           </Switch>

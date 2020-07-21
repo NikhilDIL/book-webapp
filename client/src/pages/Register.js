@@ -13,10 +13,9 @@ const Register = (props) => {
     });
 
     const { username, email, password, confirmPassword } = registerInfo;
-    const { registerUser, loadUser, state: { isAuthenticated } } =  authContext;
+    const { registerUser, state: { isAuthenticated } } =  authContext;
 
     useEffect(() => {
-        loadUser();
         if (isAuthenticated) {
             props.history.push('/main');
         }

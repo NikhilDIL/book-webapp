@@ -10,7 +10,8 @@ const AuthState = (props) => {
         token: localStorage.getItem('token'),
         isAuthenticated: false,
         user: null,
-        error: null
+        error: null,
+        loading: true
     });
 
     const loginUser = async data => {

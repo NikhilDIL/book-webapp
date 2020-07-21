@@ -46,7 +46,8 @@ const BooksState = (props) => {
         temp.push(`/api/googleapi/${searchQuery}/${i}`);
       }
       const thing = await Promise.all(temp.map(item => axios.get(item)));
-      const books = thing.map(obj => (JSON.parse(obj.data)).items)[0];
+      let books = thing.map(obj => (JSON.parse(obj.data)).items);
+      books = [].concat.apply([], books);
       dispatch({
         type: 'SEARCH_BOOKS',
         payload: books
