@@ -29,7 +29,6 @@ const Register = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        
         // add password == confirmPassword check
         registerUser({
             username,
