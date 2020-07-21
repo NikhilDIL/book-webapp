@@ -8,12 +8,4 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
-
-  app.use(
-    '/books',
-    createProxyMiddleware({
-      target: 'https://www.googleapis.com',
-      changeOrigin: true,
-    })
-  );
 };

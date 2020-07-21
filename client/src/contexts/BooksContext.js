@@ -16,10 +16,10 @@ const BooksState = (props) => {
 
     const getBookInfo = async id => {
       clearBook();
-      const res = await axios.get(`/books/v1/volumes/${id}?key=${process.env.REACT_APP_API_KEY}`);
+      const res = await axios.get(`/api/googleapi/${id}`);
       dispatch({
         type: 'GET_BOOK',
-        payload: res.data
+        payload: JSON.parse(res.data)
       });
     }
 
@@ -39,14 +39,14 @@ const BooksState = (props) => {
  
     const searchBooks = async () => {
       const { searchQuery } = state;
-      const res = await axios.get(`/books/v1/volumes?q=${searchQuery}&maxResults=40&key=`+process.env.REACT_APP_API_KEY);
-      // console.log(res.data.totalItems);
+      let res = await axios.get(`/api/googleapi/${searchQuery}/0`);
+      res = JSON.parse(res.data)
       let temp = [];
-      for (let i = 0; i < Math.min(40, res.data.totalItems); i+=40) {
-        temp.push(`/books/v1/volumes?q=${searchQuery}&startIndex=${i}&maxResults=40&key=`+process.env.REACT_APP_API_KEY);
+      for (let i = 0; i < Math.min(40, res.totalItems); i+=40) {
+        temp.push(`/api/googleapi/${searchQuery}/${i}`);
       }
       const thing = await Promise.all(temp.map(item => axios.get(item)));
-      const books = [].concat.apply([], thing.map(t => t.data.items));
+      const books = thing.map(obj => (JSON.parse(obj.data)).items)[0];
       dispatch({
         type: 'SEARCH_BOOKS',
         payload: books
