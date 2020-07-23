@@ -7,6 +7,7 @@ import Account from './pages/Account';
 import Book from './pages/Book';
 import BooksState from './contexts/BooksContext';
 import AuthState from './contexts/AuthContext';
+import BookListState from './contexts/BookListContext';
 import setAuthToken from './setAuthToken';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -16,19 +17,21 @@ if (localStorage.token) {
 
 const App = () => {
   return (
-    <AuthState>
-      <BooksState>
-        <Router>
-          <Switch>
-            <Route exact path='/' component={Login}/>
-            <Route exact path='/register' component={Register}/>
-            <ProtectedRoute exact path='/main' component={Main}/>
-            <ProtectedRoute exact path='/account' component={Account}/>
-            <ProtectedRoute exact path='/book/:id' component={Book}/>
-          </Switch>
-        </Router>
-      </BooksState>
-    </AuthState>
+    <BookListState>
+      <AuthState>
+        <BooksState>
+          <Router>
+            <Switch>
+              <Route exact path='/' component={Login}/>
+              <Route exact path='/register' component={Register}/>
+              <ProtectedRoute exact path='/main' component={Main}/>
+              <ProtectedRoute exact path='/account' component={Account}/>
+              <ProtectedRoute exact path='/book/:id' component={Book}/>
+            </Switch>
+          </Router>
+        </BooksState>
+      </AuthState>
+    </BookListState>
   );
 }
 

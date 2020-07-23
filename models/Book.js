@@ -6,6 +6,11 @@ const bookSchema = mongoose.Schema({
         required: true,
         ref: 'users'
     },
+    bookId: {
+        type: String,
+        required: true,
+        unique: true
+    },
     bookname: {
         type: String,
         required: true

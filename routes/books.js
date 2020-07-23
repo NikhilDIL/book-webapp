@@ -17,10 +17,11 @@ router.get('/', auth, async (req, res) => {
 
 // add new book to a category
 router.post('/', auth, async (req, res) => {
-    const { category, bookname } = req.body;
+    const { bookId, category, bookname } = req.body;
     try {
         const newBook = new Book({
             user: req.user.id,
+            bookId,
             bookname,
             category
         });
