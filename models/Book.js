@@ -11,6 +11,9 @@ const bookSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    bookImg: {
+        type: String
+    },
     bookname: {
         type: String,
         required: true

@@ -11,6 +11,13 @@ const BookListState = (props) => {
       finishedList: []
     });
 
+    const getUserBooks = async () => {
+      const notRead = await axios.get('/api/books/not-read');
+      const read = await axios.get('/api/books/read');
+      const favorites = await axios.get('/api/books/favorite');
+      dispatch({type: 'GET_USER_BOOKS', payload: {notRead: notRead.data, read: read.data, favorites: favorites.data}});
+    }
+
     const addFavorites = async data => {
       const res = await axios.post('/api/books', data, {
           headers: {
@@ -26,6 +33,7 @@ const BookListState = (props) => {
               'Content-Type': 'application/json'
           }
       });
+
       dispatch({type: 'ADD_READINGLIST', payload: res.data});
     }
 
@@ -39,7 +47,7 @@ const BookListState = (props) => {
     }
 
     return (
-      <BookListContext.Provider value={{ state, addFavorites, addReadingList, addFinishedList }}>
+      <BookListContext.Provider value={{ state, addFavorites, addReadingList, addFinishedList, getUserBooks }}>
         {props.children}
       </BookListContext.Provider>
     );

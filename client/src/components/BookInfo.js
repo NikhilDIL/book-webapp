@@ -8,7 +8,7 @@ const BookInfo = ({ book }) => {
     const booksContext = useContext(BooksContext);
     const bookListContext = useContext(BookListContext);
     const { getBookInfo } = booksContext;
-    const { addFavorites, addReadingList, addFinishedList } = bookListContext;
+    const { addReadingList } = bookListContext;
     const srcImg = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "";
 
     const onClick = e => {
@@ -18,6 +18,7 @@ const BookInfo = ({ book }) => {
     const addToReadingList = e => {
         addReadingList({
             bookId: book.id,
+            bookImg: srcImg,
             bookname: book.volumeInfo.title,
             category: 'not-read'
         });

@@ -1,5 +1,12 @@
 export const bookListReducer = (state, action) => {
     switch(action.type) {
+        case 'GET_USER_BOOKS':
+          return {
+            ...state,
+            finishedList: [...action.payload.read],
+            readingList: [...action.payload.notRead],
+            favorites: [...action.payload.favorites]
+          }
         case 'ADD_FAVORITE':
           return {
             ...state,
