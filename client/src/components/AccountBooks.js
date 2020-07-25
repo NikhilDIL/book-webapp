@@ -34,13 +34,13 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
             <div className="container" style={{display: "flex", justifyContent: "space-around"}}>
                 {displayList.slice(currentIndex, currentIndex+4).map(book => <AccountBookInfo key={book.bookId} book={book}/>)}
             </div>
-            <div className="btn-group container mb-2" 
+            {displayList.length !== 0 && (<div className="btn-group container mb-2" 
             role="group" 
             aria-label="Basic example"
             style={{display: "flex"}}>
                 <button onClick={leftClick} type="button" className="btn btn-dark"><i className="fa fa-arrow-left" aria-hidden="true"/></button>
                 <button onClick={rightClick} type="button" className="btn btn-dark"><i className="fa fa-arrow-right" aria-hidden="true"/></button>
-            </div>
+            </div>)}
             {displayList.length === 0 ? <div/> : (<div className="mb-1" style={{display: "flex", justifyContent: "center",
                 fontSize: "20px", fontWeight: "bold"}}>
                 {parseInt(currentIndex/4+1)+"/"+parseInt(displayList.length/4+1)}
