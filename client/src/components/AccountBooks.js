@@ -1,17 +1,38 @@
-import React from 'react';
-import AccountBookInfo from './AccountBookInfo'
+import React, { useContext, useState, useEffect } from 'react';
+import AccountBookInfo from './AccountBookInfo';
+import { BookListContext } from '../contexts/BookListContext';
 
-const AccountBooks = ({ books, currentIndex, setCurrentIndex }) => {
-   const leftClick = e => {
-       currentIndex === 0 ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex-4);
-   }
-   const rightClick = e => {
-       currentIndex+4 >= books.length ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex+4);
-   }
+const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
+    const [displayList, setDisplayList] = useState([]);
+    const { state: { readingList, finishedList, favorites } } = useContext(BookListContext);
+
+    useEffect(() => {
+        switch(booksType) {
+            case 'readingList':
+                setDisplayList(readingList);
+                break;
+            case 'finishedList':
+                setDisplayList(finishedList);
+                break;
+            case 'favorites':
+                setDisplayList(favorites);
+                break;
+            default:
+                setDisplayList([]);
+        }
+    }, [booksType, readingList, finishedList, favorites]);
+
+    const leftClick = e => {
+        currentIndex === 0 ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex-4);
+    }
+    const rightClick = e => {
+        currentIndex+4 >= displayList.length ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex+4);
+    }
+
     return (
         <div className="container card">
             <div className="container" style={{display: "flex", justifyContent: "space-around"}}>
-                {books.slice(currentIndex, currentIndex+4).map(book => <AccountBookInfo key={book.bookId} book={book}/>)}
+                {displayList.slice(currentIndex, currentIndex+4).map(book => <AccountBookInfo key={book.bookId} book={book}/>)}
             </div>
             <div className="btn-group container mb-2" 
             role="group" 

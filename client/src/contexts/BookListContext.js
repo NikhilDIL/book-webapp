@@ -11,6 +11,17 @@ const BookListState = (props) => {
       finishedList: []
     });
 
+    // add updateToReading and updateToFinished
+
+    const updateToFinished = async (data, userid, bookid) => {
+      const res = await axios.put(`/api/books/${userid}/${bookid}`, data, {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+      dispatch({type: 'UPDATE_FINISHED', payload: res.data});
+    }
+
     const getUserBooks = async () => {
       const notRead = await axios.get('/api/books/not-read');
       const read = await axios.get('/api/books/read');
@@ -47,7 +58,7 @@ const BookListState = (props) => {
     }
 
     return (
-      <BookListContext.Provider value={{ state, addFavorites, addReadingList, addFinishedList, getUserBooks }}>
+      <BookListContext.Provider value={{ state, addFavorites, addReadingList, addFinishedList, getUserBooks, updateToFinished }}>
         {props.children}
       </BookListContext.Provider>
     );

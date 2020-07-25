@@ -7,6 +7,13 @@ export const bookListReducer = (state, action) => {
             readingList: [...action.payload.notRead],
             favorites: [...action.payload.favorites]
           }
+        case 'UPDATE_FINISHED':
+          return {
+            ...state,
+            finishedList: [...state.finishedList, action.payload],
+            readingList: state.readingList.filter(book => book.bookId !== action.payload.bookId),
+            favorites: state.favorites.filter(book => book.bookId !== action.payload.bookId)
+          }
         case 'ADD_FAVORITE':
           return {
             ...state,
