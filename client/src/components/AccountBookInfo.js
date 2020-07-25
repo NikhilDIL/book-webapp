@@ -8,19 +8,21 @@ import '../css/bookInfo.css';
 const AccountBookInfo = ({ book }) => {
     const { getBookInfo } = useContext(BooksContext);
     const { state: { user } } = useContext(AuthContext);
-    const { updateToFinished } = useContext(BookListContext);
+    const { updateToFinished, updateToFavorite, updateToReading } = useContext(BookListContext);
  
     const onClick = e => {
         getBookInfo(book.bookId);
     }
     const updateFinished = e => {updateToFinished({category: "read"}, user._id, book.bookId);}
+    const updateFavorite = e => {updateToFavorite({category: "favorite"}, user._id, book.bookId);}
+    const updateReading = e => {updateToReading({category: "not-read"}, user._id, book.bookId);}
 
     return (
         <div className="bookinfo-border mb-2">
             <h5 style={{textAlign: "center"}}>{book.bookname}</h5>
             <Link to={`/book/${book.bookId}`} onClick={onClick}><img src={book.bookImg} alt="bookPicture" className="bookinfo-img"/></Link>
             <div className="btn-group" role="group" aria-label="Basic example">
-                <button  
+                <button onClick={updateReading}
                 type="button" 
                 className="btn btn-info" 
                 data-toggle="tooltip" 
@@ -36,7 +38,7 @@ const AccountBookInfo = ({ book }) => {
                 title="Mark as finished">
                     <i className="fas fa-book"/>
                 </button>
-                <button
+                <button onClick={updateFavorite}
                 type="button" 
                 className="btn btn-info" 
                 data-toggle="tooltip" 

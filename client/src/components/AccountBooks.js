@@ -41,6 +41,10 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
                 <button onClick={leftClick} type="button" className="btn btn-dark"><i className="fa fa-arrow-left" aria-hidden="true"/></button>
                 <button onClick={rightClick} type="button" className="btn btn-dark"><i className="fa fa-arrow-right" aria-hidden="true"/></button>
             </div>
+            {displayList.length === 0 ? <div/> : (<div className="mb-1" style={{display: "flex", justifyContent: "center",
+                fontSize: "20px", fontWeight: "bold"}}>
+                {parseInt(currentIndex/4+1)+"/"+parseInt(displayList.length/4+1)}
+            </div>)}
         </div>
     );
 }
