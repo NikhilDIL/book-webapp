@@ -46,6 +46,26 @@ router.post('/', [
     }
 });
 
-
+// update user info
+router.put('/:id', auth, async (req, res) => {
+    const { email, password } = req.body;
+    let data = {};
+    try {
+        if (email) {
+            data.email = email;
+        } else {
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+            data.password = hashedPassword;
+        }
+        const user = await User.findByIdAndUpdate(req.params.id,
+            {$set: data},
+            {new: true});
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports = router;

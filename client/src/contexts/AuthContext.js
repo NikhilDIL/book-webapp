@@ -14,6 +14,30 @@ const AuthState = (props) => {
         loading: true
     });
 
+    const changeEmail = async data => {
+        await axios.put(`/api/auth/${state.user._id}`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    const changePassword = async data => {
+        try {
+            const res = await axios.put(`/api/auth/${state.user._id}`, data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            dispatch({ type: 'CHANGE_PASSWORD', payload: res.data});
+        } catch (err) {
+            dispatch({
+                type: 'CHANGE_PASS_FAIL',
+                payload: err.response.data.msg
+            });
+        } 
+    }
+
     const loginUser = async data => {
         try {
             const res = await axios.post('/api/auth', data, {
@@ -66,7 +90,7 @@ const AuthState = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser }}>
+        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser, changePassword, changeEmail }}>
           {props.children}
         </AuthContext.Provider>
     );
