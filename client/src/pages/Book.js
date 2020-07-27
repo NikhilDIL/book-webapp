@@ -1,21 +1,43 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import Navbar from'../components/Navbar';
 import { BooksContext } from '../contexts/BooksContext';
 import { AuthContext } from '../contexts/AuthContext';
+import { BookListContext } from '../contexts/BookListContext';
 
 const Book = ({ match }) => {
     const { state: { book }, getBookInfo } = useContext(BooksContext);
+    const [userHasBook, setUserHasBook] = useState(false);
+    const [buttonProps, setButtonProps] = useState({msg: 'Add to Reading List', style: 'btn btn-dark btn-block'});
+    const [bookAdded, setBookAdded] = useState(false);
+    const { addReadingList, doesUserHaveBook } = useContext(BookListContext);
     const { loadUser } = useContext(AuthContext);
 
     useEffect(() => {
         loadUser();
         getBookInfo(match.params.id);
+        doesUserHaveBook(match.params.id)
+            .then(res => {
+                console.log('res', res);
+                if (res) setUserHasBook(true);
+            })
         // eslint-disable-next-line
     }, []);
 
+    const addToReadingList = e => {
+        if (userHasBook) {
+            setButtonProps({msg: 'Book Exists in Account Page', style: 'btn btn-secondary btn-block'});
+            return;
+        }
+        const srcImg = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "";
+        addReadingList({
+            bookId: book.id,
+            bookImg: srcImg,
+            bookname: book.volumeInfo.title,
+            category: 'not-read'
+        });
+        setBookAdded(true);
+    }
     const { volumeInfo } = book;
-    console.log(book);
-
     if (!volumeInfo) {
         return <div/>
     }
@@ -41,6 +63,11 @@ const Book = ({ match }) => {
                         <div style={{display: "flex"}}>
                             <h5 className="mr-1">Publisher: </h5>
                             <p>{volumeInfo.publisher}</p>
+                        </div>
+                        <div style={{width: "200px"}}>
+                            {bookAdded ? (<div className="btn btn-success btn-block">Book Added to List</div>) : (<button type="button" onClick={addToReadingList} className={buttonProps.style}>
+                                {buttonProps.msg}
+                            </button>)}
                         </div>
                     </div>
                 </div>

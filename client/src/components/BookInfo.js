@@ -11,7 +11,7 @@ const BookInfo = ({ book }) => {
     const [buttonProps, setButtonProps] = useState({msg: 'Add to Reading List', style: 'btn btn-dark btn-block'});
     const [bookAdded, setBookAdded] = useState(false);
     const { getBookInfo } = booksContext;
-    const { doesUserHaveBook, addReadingList, state: { error } } = bookListContext;
+    const { doesUserHaveBook, addReadingList } = bookListContext;
     const srcImg = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "";
 
     useEffect(() => {
@@ -47,7 +47,6 @@ const BookInfo = ({ book }) => {
             {bookAdded ? (<div className="btn btn-success btn-block">Book Added to List</div>) : (<button type="button" onClick={addToReadingList} className={buttonProps.style}>
                 {buttonProps.msg}
             </button>)}
-            
         </div>
     );
 }

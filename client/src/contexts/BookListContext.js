@@ -74,7 +74,6 @@ const BookListState = (props) => {
         dispatch({type: 'ADD_READINGLIST', payload: res.data});
       } catch (err) {
         dispatch({type: 'ADD_DB_ERROR'});
-        console.log(state.error);
       }
     }
 
