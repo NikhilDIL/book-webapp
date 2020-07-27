@@ -43,7 +43,7 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
             </div>)}
             {displayList.length === 0 ? <div/> : (<div className="mb-1" style={{display: "flex", justifyContent: "center",
                 fontSize: "20px", fontWeight: "bold"}}>
-                {parseInt(currentIndex/4+1)+"/"+parseInt(displayList.length/4+1)}
+                {parseInt(currentIndex/4+1)+"/"+parseInt(Math.ceil(displayList.length/4))}
             </div>)}
         </div>
     );

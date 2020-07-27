@@ -14,6 +14,19 @@ const AuthState = (props) => {
         loading: true
     });
 
+    const verifyPassword = async data => {
+        try {
+            await axios.post('/api/auth', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return true;
+        } catch (err) {
+            return false;
+        }
+    }
+
     const changeEmail = async data => {
         await axios.put(`/api/auth/${state.user._id}`, data, {
             headers: {
@@ -90,7 +103,7 @@ const AuthState = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser, changePassword, changeEmail }}>
+        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser, changePassword, changeEmail, verifyPassword }}>
           {props.children}
         </AuthContext.Provider>
     );

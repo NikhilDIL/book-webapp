@@ -8,8 +8,7 @@ const bookSchema = mongoose.Schema({
     },
     bookId: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     bookImg: {
         type: String
