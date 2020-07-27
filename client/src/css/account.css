@@ -1,0 +1,28 @@
+.accountBooks-display {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (max-width:1024px){
+    .accountBooks-display {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width:768px){
+    .accountBooks-display {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width:600px){
+    .accountBooks-display {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

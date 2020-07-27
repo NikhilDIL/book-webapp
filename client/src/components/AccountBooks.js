@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AccountBookInfo from './AccountBookInfo';
 import { BookListContext } from '../contexts/BookListContext';
+import '../css/account.css';
 
 const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
     const [displayList, setDisplayList] = useState([]);
@@ -31,7 +32,7 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
 
     return (
         <div className="container card">
-            <div className="container" style={{display: "flex", justifyContent: "space-around"}}>
+            <div className="container accountBooks-display">
                 {displayList.slice(currentIndex, currentIndex+4).map(book => <AccountBookInfo key={book.bookId} book={book}/>)}
             </div>
             {displayList.length !== 0 && (<div className="btn-group container mb-2" 
