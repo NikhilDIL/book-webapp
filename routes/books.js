@@ -26,6 +26,17 @@ router.get('/:category', auth, async (req, res) => {
     }
 });
 
+// get a specific book from the user
+router.get('/book/:bookid', auth, async (req, res) => {
+    try {
+        const book = await Book.find({ user: req.user.id, bookId: req.params.bookid });
+        res.json(book);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
 // add new book to a category
 router.post('/', auth, async (req, res) => {
     const { bookId, bookImg, category, bookname } = req.body;

@@ -8,8 +8,17 @@ const BookListState = (props) => {
     const [state, dispatch] = useReducer(bookListReducer, {
       favorites: [],
       readingList: [],
-      finishedList: []
+      finishedList: [],
+      error: {}
     });
+
+    const doesUserHaveBook = async (bookid) => {
+        const res = await axios.get(`/api/books/book/${bookid}`);;
+        if (!res.data[0]) {
+          return false;
+        }
+        return true;
+    }
 
     // add updateToReading and updateToFavorite
     const updateToReading = async (data, userid, bookid) => {
@@ -56,13 +65,17 @@ const BookListState = (props) => {
     }
 
     const addReadingList = async data => {
-      const res = await axios.post('/api/books', data, {
+      try {
+        const res = await axios.post('/api/books', data, {
           headers: {
               'Content-Type': 'application/json'
           }
-      });
-
-      dispatch({type: 'ADD_READINGLIST', payload: res.data});
+        });
+        dispatch({type: 'ADD_READINGLIST', payload: res.data});
+      } catch (err) {
+        dispatch({type: 'ADD_DB_ERROR'});
+        console.log(state.error);
+      }
     }
 
     const addFinishedList = async data => {
@@ -75,7 +88,17 @@ const BookListState = (props) => {
     }
 
     return (
-      <BookListContext.Provider value={{ state, addFavorites, addReadingList, addFinishedList, getUserBooks, updateToFinished, updateToFavorite, updateToReading }}>
+      <BookListContext.Provider value={{ 
+          state, 
+          addFavorites, 
+          addReadingList, 
+          addFinishedList, 
+          getUserBooks, 
+          updateToFinished, 
+          updateToFavorite, 
+          updateToReading,
+          doesUserHaveBook
+       }}>
         {props.children}
       </BookListContext.Provider>
     );

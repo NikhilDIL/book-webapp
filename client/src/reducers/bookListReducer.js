@@ -43,6 +43,12 @@ export const bookListReducer = (state, action) => {
             ...state,
             finishedList: [...state.finishedList, action.payload]
           }
+        case 'ADD_DB_ERROR':
+          console.log({...state, error: {msg: "fesfes"}})
+          return {
+            ...state,
+            error: {msg: "Book already exists in one of your lists"}
+          }
         default:
           return state;
     }
