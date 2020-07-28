@@ -23,7 +23,7 @@ const Pagination = () => {
             </div>
             {books.length === 0 ? <div className="mb-5"></div> : (<div className="mb-5" style={{display: "flex", justifyContent: "center",
                 fontSize: "20px", fontWeight: "bold"}}>
-                {parseInt(currentIndex/8+1)+"/"+parseInt(books.length/8)}
+                {parseInt(currentIndex/8+1)+"/"+parseInt(Math.ceil(books.length/8))}
             </div>)}
         </Fragment>
         

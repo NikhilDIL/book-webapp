@@ -48,9 +48,20 @@ const BooksState = (props) => {
       const thing = await Promise.all(temp.map(item => axios.get(item)));
       let books = thing.map(obj => (JSON.parse(obj.data)).items);
       books = [].concat.apply([], books);
+      
+      // remove duplicates
+      let hashmap = new Map();
+      let filteredBooks = [];
+      books.forEach(book => {
+        if (!hashmap.get(book.id)) {
+          hashmap.set(book.id, true);
+          filteredBooks.push(book);
+        }
+      });
+
       dispatch({
         type: 'SEARCH_BOOKS',
-        payload: books
+        payload: filteredBooks
       });
     }
 
