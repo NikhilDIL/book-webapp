@@ -9,8 +9,29 @@ const BookListState = (props) => {
       favorites: [],
       readingList: [],
       finishedList: [],
+      filtered: null,
       error: {}
     });
+
+    const clearFilter = () => {
+      dispatch({type: 'CLEAR_FILTER'});
+    }
+
+    const searchUserBooks = (booksType, query) => {
+      switch(booksType) {
+        case 'readingList':
+            dispatch({type: 'SEARCH_READING_LIST', payload: query});
+            break;
+        case 'finishedList':
+            dispatch({type: 'SEARCH_FINISHED_LIST', payload: query});
+            break;
+        case 'favorites':
+            dispatch({type: 'SEARCH_FAVORITES', payload: query});
+            break;
+        default:
+            return;
+      }
+    }
 
     const removeUserBook = async bookid => {
       await axios.delete(`/api/books/${bookid}`);
@@ -102,7 +123,9 @@ const BookListState = (props) => {
           updateToFavorite, 
           updateToReading,
           doesUserHaveBook,
-          removeUserBook
+          removeUserBook,
+          searchUserBooks,
+          clearFilter
        }}>
         {props.children}
       </BookListContext.Provider>

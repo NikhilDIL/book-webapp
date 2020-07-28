@@ -1,5 +1,34 @@
 export const bookListReducer = (state, action) => {
     switch(action.type) {
+        case 'CLEAR_FILTER':
+          return {
+            ...state,
+            filtered: null
+          }
+        case 'SEARCH_READING_LIST':
+          return {
+            ...state,
+            filtered: state.readingList.filter(book => {
+                const regex = new RegExp(`${action.payload}`, 'gi');;
+                return book.bookname.match(regex);
+            })
+          }
+        case 'SEARCH_FINISHED_LIST':
+          return {
+            ...state,
+            filtered: state.finishedList.filter(book => {
+                const regex = new RegExp(`${action.payload}`, 'gi');;
+                return book.bookname.match(regex);
+            })
+          }
+        case 'SEARCH_FAVORITES':
+          return {
+            ...state,
+            filtered: state.favorites.filter(book => {
+                const regex = new RegExp(`${action.payload}`, 'gi');;
+                return book.bookname.match(regex);
+            })
+          }
         case 'GET_USER_BOOKS':
           return {
             ...state,

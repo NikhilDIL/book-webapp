@@ -77,14 +77,6 @@ router.put('/:userid/:bookid', auth, async (req, res) => {
 // delete book from profile
 router.delete('/:id', auth, async (req, res) => {
     try {
-        // let book = await Book.findById(req.params.id);
-        // if (!book) return res.status(400).json({msg: 'book not found'});
-        
-        // if (book.user.toString() !== req.user.id) {
-        //     return res.status(401).json({msg: 'not authorized'});
-        // }
-        // await Book.findByIdAndRemove(req.params.id);
-        // res.json({msg: 'book removed'});
         await Book.findOneAndRemove({user: req.user.id, bookId: req.params.id});
         res.json({msg: 'book removed'});
     } catch(err) {
