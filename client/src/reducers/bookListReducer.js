@@ -28,6 +28,14 @@ export const bookListReducer = (state, action) => {
             favorites: state.favorites.filter(book => book.bookId !== action.payload.bookId),
             finishedList: state.finishedList.filter(book => book.bookId !== action.payload.bookId)
           }
+        case 'REMOVE_BOOK':
+          return {
+            ...state,
+            readingList: state.readingList.filter(book => book.bookId !== action.payload),
+            favorites: state.favorites.filter(book => book.bookId !== action.payload),
+            finishedList: state.finishedList.filter(book => book.bookId !== action.payload)
+
+          }
         case 'ADD_FAVORITE':
           return {
             ...state,

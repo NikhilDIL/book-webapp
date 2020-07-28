@@ -8,7 +8,7 @@ import '../css/bookInfo.css';
 const AccountBookInfo = ({ book }) => {
     const { getBookInfo } = useContext(BooksContext);
     const { state: { user } } = useContext(AuthContext);
-    const { updateToFinished, updateToFavorite, updateToReading } = useContext(BookListContext);
+    const { updateToFinished, updateToFavorite, updateToReading, removeUserBook } = useContext(BookListContext);
  
     const onClick = e => {
         getBookInfo(book.bookId);
@@ -16,6 +16,7 @@ const AccountBookInfo = ({ book }) => {
     const updateFinished = e => {updateToFinished({category: "read"}, user._id, book.bookId);}
     const updateFavorite = e => {updateToFavorite({category: "favorite"}, user._id, book.bookId);}
     const updateReading = e => {updateToReading({category: "not-read"}, user._id, book.bookId);}
+    const removeBook = e => {removeUserBook(book.bookId);}
 
     return (
         <div className="bookinfo-border mb-2">
@@ -45,6 +46,14 @@ const AccountBookInfo = ({ book }) => {
                 data-placement="top" 
                 title="Add to favorites">
                     <i className="fas fa-star"/>
+                </button>
+                <button onClick={removeBook}
+                type="button" 
+                className="btn btn-danger" 
+                data-toggle="tooltip" 
+                data-placement="top" 
+                title="Remove Book">
+                    <i className="fa fa-times" aria-hidden="true"/>
                 </button>
             </div>
         </div>

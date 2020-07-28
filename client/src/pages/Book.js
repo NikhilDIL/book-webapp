@@ -17,7 +17,6 @@ const Book = ({ match }) => {
         getBookInfo(match.params.id);
         doesUserHaveBook(match.params.id)
             .then(res => {
-                console.log('res', res);
                 if (res) setUserHasBook(true);
             })
         // eslint-disable-next-line

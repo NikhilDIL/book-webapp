@@ -12,8 +12,13 @@ const BookListState = (props) => {
       error: {}
     });
 
+    const removeUserBook = async bookid => {
+      await axios.delete(`/api/books/${bookid}`);
+      dispatch({type: 'REMOVE_BOOK', payload: bookid})
+    }
+
     const doesUserHaveBook = async (bookid) => {
-        const res = await axios.get(`/api/books/book/${bookid}`);;
+        const res = await axios.get(`/api/books/book/${bookid}`);
         if (!res.data[0]) {
           return false;
         }
@@ -96,7 +101,8 @@ const BookListState = (props) => {
           updateToFinished, 
           updateToFavorite, 
           updateToReading,
-          doesUserHaveBook
+          doesUserHaveBook,
+          removeUserBook
        }}>
         {props.children}
       </BookListContext.Provider>
