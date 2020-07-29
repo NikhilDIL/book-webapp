@@ -7,7 +7,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 const Account = () => {
     const { loadUser } = useContext(AuthContext);
-    const { getUserBooks } = useContext(BookListContext);
+    const { getUserBooks, changeListSwitch } = useContext(BookListContext);
     const [displayType, setDisplayType] = useState('none');
     const [currentIndex, setCurrentIndex] = useState(0);
  
@@ -17,9 +17,9 @@ const Account = () => {
         // eslint-disable-next-line
     }, []);
 
-    const displayFinished = e => {setDisplayType('finishedList'); setCurrentIndex(0);}
-    const displayReading= e => {setDisplayType('readingList'); setCurrentIndex(0);}
-    const displayFavorites = e => {setDisplayType('favorites'); setCurrentIndex(0);}
+    const displayFinished = e => {setDisplayType('finishedList'); changeListSwitch(); setCurrentIndex(0);}
+    const displayReading= e => {setDisplayType('readingList'); changeListSwitch(); setCurrentIndex(0);}
+    const displayFavorites = e => {setDisplayType('favorites'); changeListSwitch(); setCurrentIndex(0);}
 
     return (
         <Fragment>

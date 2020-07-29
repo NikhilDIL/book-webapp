@@ -10,8 +10,13 @@ const BookListState = (props) => {
       readingList: [],
       finishedList: [],
       filtered: null,
-      error: {}
+      error: {},
+      listSwitch: false
     });
+
+    const changeListSwitch = () => {
+      dispatch({type: 'LIST_SWITCH'});
+    }
 
     const clearFilter = () => {
       dispatch({type: 'CLEAR_FILTER'});
@@ -125,7 +130,8 @@ const BookListState = (props) => {
           doesUserHaveBook,
           removeUserBook,
           searchUserBooks,
-          clearFilter
+          clearFilter,
+          changeListSwitch
        }}>
         {props.children}
       </BookListContext.Provider>

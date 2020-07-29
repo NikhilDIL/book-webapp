@@ -3,12 +3,12 @@ import { BookListContext } from '../contexts/BookListContext';
 
 const AccountSearch = ({ booksType }) => {
     const query = useRef('');
-    const { searchUserBooks, clearFilter } = useContext(BookListContext);
+    const { searchUserBooks, clearFilter, state: { listSwitch } } = useContext(BookListContext);
 
     useEffect(() => {
         query.current.value = '';
         // eslint-disable-next-line
-    }, []);
+    }, [listSwitch]);
 
     const onChange = e => {
         if (query.current.value !== '') {

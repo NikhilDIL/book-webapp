@@ -85,6 +85,12 @@ export const bookListReducer = (state, action) => {
             ...state,
             error: {msg: "Book already exists in one of your lists"}
           }
+        case 'LIST_SWITCH':
+          return {
+            ...state,
+            listSwitch: !state.listSwitch,
+            filtered: null
+          }
         default:
           return state;
     }
