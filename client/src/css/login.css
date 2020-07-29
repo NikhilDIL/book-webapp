@@ -52,3 +52,38 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.test {
+    width: 40%
+}
+
+.login-heading {
+    font-size: 15vh;
+}
+
+@media (max-width:1024px){
+    .test {
+        width: 70%
+    }
+    .login-heading {
+        font-size: 10vh;
+    }
+}
+
+@media (max-width:768px){
+    .test {
+        width: 100%
+    }
+    .login-heading {
+        font-size: 10vh;
+    }
+}
+
+@media (max-width:600px){
+    .test {
+        width: 100%
+    }
+    .login-heading {
+        font-size: 10vh;
+    }
+}

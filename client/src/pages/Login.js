@@ -42,31 +42,42 @@ const Login = (props) => {
 
     return (
             <div className="login-imgbg">
-                <h1 className="pt-5" style={{textAlign:"center", fontSize: "7vw"}}>My Book List</h1>
-                <div className="login-box">
-                    <form className="container" onSubmit={onSubmit}>
-                        <h1 className="mt-4">USER LOGIN</h1>
-                        <div className="login-inputs">
-                            <input type="email" 
-                                placeholder="Email" 
-                                name="email" 
-                                value={email}
-                                className="mt-3 mb-4" 
-                                onChange={onChange}
-                            />
-                            <input type="password"
-                                placeholder="Password" 
-                                name="password" 
-                                value={password}
-                                className="mb-4" 
-                                onChange={onChange}
-                            />
-                        </div>
-                        <div className="login-button">
-                            <input type="submit" value="Login" className="btn btn-dark"/>
-                        </div>
-                        <Link to="/register" className="link">Create New Account</Link>
-                    </form>
+                <h1 className="login-heading pt-5" style={{textAlign:"center"}}>My Book List</h1>
+                <div className="mt-5" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <div className="test">
+                        <form onSubmit={onSubmit}>
+                            <div className="col">
+                                <div className="form-group mt-3">
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        value={email}
+                                        className="form-control" 
+                                        placeholder="Email"
+                                        onChange={onChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        value={password}
+                                        className="form-control" 
+                                        placeholder="Password"
+                                        onChange={onChange}
+                                    />
+                                </div>
+                                <div>
+                                    <button type="submit" className="btn btn-dark btn-block">Login</button>
+                                </div>
+                                <Link to="/register" 
+                                className="mt-3"
+                                style={{display: "flex", justifyContent: "center", textDecoration: "none", color: "white"}}>
+                                    Create New Account
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
     );
