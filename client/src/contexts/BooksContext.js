@@ -9,8 +9,11 @@ const BooksState = (props) => {
       books: [],
       book: {},
       currentIndex: 0,
-      searchQuery: ''
+      searchQuery: '',
+      loading: false
     });
+
+    const clearBooks = () => dispatch({type: 'CLEAR_BOOKS'});
 
     const clearBook = () => dispatch({type: 'CLEAR_BOOK'});
 
@@ -66,7 +69,7 @@ const BooksState = (props) => {
     }
 
     return (
-      <BooksContext.Provider value={{ state, setIndex, searchBooks, setSearchQuery, getBookInfo }}>
+      <BooksContext.Provider value={{ state, setIndex, searchBooks, setSearchQuery, getBookInfo, clearBooks }}>
         {props.children}
       </BooksContext.Provider>
     );

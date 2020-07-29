@@ -3,6 +3,7 @@ import Navbar from'../components/Navbar';
 import SearchBar from '../components/SearchBar';
 import Books from '../components/Books';
 import Pagination from '../components/Pagination';
+import Spinner from '../components/Spinner';
 import { BooksContext } from '../contexts/BooksContext';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -19,9 +20,11 @@ const Main = () => {
         <div>
             <Navbar/>
             <SearchBar/>
-            <div className="mt-5 mb-5" align="center">
+            {state.loading ? 
+            <Spinner/> : 
+            (<div className="mt-5 mb-5" align="center">
                 <Books books={state.books}/>
-            </div>
+            </div>)}
             {state.books.length === 0 ? <div/> : <Pagination/>}
         </div>
     );

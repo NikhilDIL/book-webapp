@@ -3,7 +3,8 @@ export const booksReducer = (state, action) => {
         case 'SEARCH_BOOKS':
           return {
             ...state,
-            books: action.payload
+            books: action.payload,
+            loading: false
           }
         case 'SET_INDEX':
           return {
@@ -24,6 +25,12 @@ export const booksReducer = (state, action) => {
           return {
             ...state,
             book: {}
+          }
+        case 'CLEAR_BOOKS':
+          return {
+            ...state,
+            books: [],
+            loading: true
           }
         default:
           return state;
