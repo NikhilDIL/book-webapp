@@ -2,17 +2,8 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { BookListContext } from '../contexts/BookListContext';
 
 const AccountSearch = ({ booksType }) => {
-    // const [query, setQuery] = useState('');
     const query = useRef('');
     const { searchUserBooks, clearFilter } = useContext(BookListContext);
-    // const onChange = e => {
-    //     setQuery(e.target.value);
-    // }
-    // const onSubmit = e => {
-    //     e.preventDefault();
-    //     searchUserBooks(booksType, query);
-    //     setQuery('');
-    // }
 
     useEffect(() => {
         query.current.value = '';

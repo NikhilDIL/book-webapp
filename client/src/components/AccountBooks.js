@@ -29,7 +29,7 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
     }
 
     const rightClick = e => {
-        currentIndex+4 >= displayList.length ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex+4);
+        currentIndex+4 >= (filtered !== null ? filtered.length : displayList.length) ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex+4);
     }
     // console.log(filtered === []);
     return (
@@ -48,7 +48,7 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
             </div>)}
             {displayList.length === 0 ? <div/> : (<div className="" style={{display: "flex", justifyContent: "center",
                 fontSize: "20px", fontWeight: "bold"}}>
-                {parseInt(currentIndex/4+1)+"/"+parseInt(Math.ceil(displayList.length/4))}
+                {parseInt(currentIndex/4+1)+"/"+parseInt(Math.ceil((filtered !== null ? filtered.length : displayList.length)/4))}
             </div>)}
         </div>
     );
