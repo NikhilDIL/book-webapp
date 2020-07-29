@@ -21,10 +21,13 @@ const Main = () => {
             <Navbar/>
             <SearchBar/>
             {state.loading ? 
-            <Spinner/> : 
-            (<div className="mt-5 mb-5" align="center">
-                <Books books={state.books}/>
+            <Spinner/> :
+            (<div className="mt-5 mb-5" style={{display: "flex", justifyContent: "center"}}>
+                <div>
+                    <Books books={state.books}/>
+                </div>
             </div>)}
+            
             {state.books.length === 0 ? <div/> : <Pagination/>}
         </div>
     );

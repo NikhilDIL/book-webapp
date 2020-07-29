@@ -34,7 +34,7 @@ const Register = (props) => {
             username,
             email,
             password
-        })
+        });
         setRegisterInfo({
             username: '',
             email: '',
@@ -82,7 +82,7 @@ const Register = (props) => {
                             </div>
                             <div className="form-group">
                                 <input 
-                                    type="confirmPassword" 
+                                    type="password" 
                                     name="confirmPassword" 
                                     value={confirmPassword}
                                     className="form-control" 
