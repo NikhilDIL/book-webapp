@@ -34,7 +34,7 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
     // console.log(filtered === []);
     return (
         <div className="container card mb-5">
-            {<AccountSearch booksType={booksType}/>}
+            {displayList.length !== 0 && <AccountSearch booksType={booksType}/>}
             <div className="container accountBooks-display">
                 {filtered !== null ? (filtered.slice(currentIndex, currentIndex+4).map(book => <AccountBookInfo key={book.bookId} book={book}/>)) 
                     : (displayList.slice(currentIndex, currentIndex+4).map(book => <AccountBookInfo key={book.bookId} book={book}/>))}

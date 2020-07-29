@@ -4,8 +4,8 @@ import { AuthContext } from '../contexts/AuthContext';
 
 const UserProfileInfo = () => {
     const { state: { user }, changePassword, changeEmail, verifyPassword } = useContext(AuthContext);
-    const [emailAlert, setEmailAlert] = useState({display: false, msg: ''});
-    const [passwordAlert, setPasswordAlert] = useState({display: false, msg: ''});
+    const [emailAlert, setEmailAlert] = useState({display: false, msg: '', color: ''});
+    const [passwordAlert, setPasswordAlert] = useState({display: false, msg: '', color: ''});
     const [emailInfo, setEmailInfo] = useState({
         newEmail: '',
         confirmNewEmail: ''
@@ -25,8 +25,8 @@ const UserProfileInfo = () => {
         // check if newEmail and confirmEmail are equal
         if (newEmail !== confirmNewEmail) {
             e.preventDefault();
-            setEmailAlert({display: true, msg: 'Emails do not match'});
-            setTimeout(() => setEmailAlert({display: false, msg: ''}), 4000);
+            setEmailAlert({display: true, msg: 'Emails do not match', color: 'bg-danger'});
+            setTimeout(() => setEmailAlert({display: false, msg: '', color: ''}), 4000);
         } else {
             changeEmail({email: newEmail});
         }
@@ -38,18 +38,20 @@ const UserProfileInfo = () => {
     const onSubmitPass = (e) => {
         e.preventDefault();
         if (newPassword !== confirmNewPassword) {
-            setPasswordAlert({display: true, msg: 'New password does not match'});
-            setTimeout(() => setPasswordAlert({display: false, msg: ''}), 4000);
+            setPasswordAlert({display: true, msg: 'New password does not match', color: 'bg-danger'});
+            setTimeout(() => setPasswordAlert({display: false, msg: '', color: ''}), 4000);
         } else {
             verifyPassword({
                 email: user.email,
                 password: currentPassword
             }).then(res => {
                 if (!res) {
-                    setPasswordAlert({display: true, msg: 'Incorrect Password'});
-                    setTimeout(() => setPasswordAlert({display: false, msg: ''}), 4000);
+                    setPasswordAlert({display: true, msg: 'Incorrect Password', color: 'bg-danger'});
+                    setTimeout(() => setPasswordAlert({display: false, msg: '', color: ''}), 4000);
                 } else {
                     changePassword({password: newPassword});
+                    setPasswordAlert({display: true, msg: 'Password changed successfully', color: 'bg-success'});
+                    setTimeout(() => setPasswordAlert({display: false, msg: '', color: ''}), 4000);
                 }
             });
         }
@@ -68,8 +70,8 @@ const UserProfileInfo = () => {
                 <p className="badge badge-primary">Email: {user.email}</p>
             </div>
 
-            {emailAlert.display && <Alert msg={emailAlert.msg}/>}
-            {passwordAlert.display && <Alert msg={passwordAlert.msg}/>}
+            {emailAlert.display && <Alert msg={emailAlert.msg} color={emailAlert.color}/>}
+            {passwordAlert.display && <Alert msg={passwordAlert.msg} color={passwordAlert.color}/>}
             
             <div>
                 <h3>Change Email</h3>

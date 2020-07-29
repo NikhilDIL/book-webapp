@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Alert = ({ msg }) => {
+const Alert = ({ msg, color }) => {
     return (
-        <div className="bg-danger text-white pl-2 pt-2 pb-2" 
+        <div className={color+" text-white pl-2 pt-2 pb-2"} 
             style={{width: "50%", 
                     borderRadius: "10px",
                     textAlign: "left"}}>
