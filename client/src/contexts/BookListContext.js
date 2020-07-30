@@ -23,15 +23,16 @@ const BookListState = (props) => {
     }
 
     const searchUserBooks = (booksType, query) => {
+      const filteredQuery = query.replace(/[^\w\s]/gi, '');
       switch(booksType) {
         case 'readingList':
-            dispatch({type: 'SEARCH_READING_LIST', payload: query});
+            dispatch({type: 'SEARCH_READING_LIST', payload: filteredQuery});
             break;
         case 'finishedList':
-            dispatch({type: 'SEARCH_FINISHED_LIST', payload: query});
+            dispatch({type: 'SEARCH_FINISHED_LIST', payload: filteredQuery});
             break;
         case 'favorites':
-            dispatch({type: 'SEARCH_FAVORITES', payload: query});
+            dispatch({type: 'SEARCH_FAVORITES', payload: filteredQuery});
             break;
         default:
             return;

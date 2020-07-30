@@ -10,6 +10,10 @@ const AccountSearch = ({ booksType }) => {
         // eslint-disable-next-line
     }, [listSwitch]);
 
+    const onSubmit = e => {
+        e.preventDefault();
+    }
+
     const onChange = e => {
         if (query.current.value !== '') {
             searchUserBooks(booksType, e.target.value);
@@ -19,7 +23,7 @@ const AccountSearch = ({ booksType }) => {
     }
 
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <div className="row">
                 <div className="form-group" style={{width: "100%"}}>
                     <input 
