@@ -32,11 +32,15 @@ const AuthState = (props) => {
     }
 
     const changeEmail = async data => {
-        await axios.put(`/api/auth/${state.user._id}`, data, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        try {
+            await axios.put(`/api/auth/${state.user._id}`, data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        } catch (err) {
+            dispatch({type: 'EMAIL_CHANGE_FAILURE', payload: err.response.data.msg});
+        }
     }
 
     const changePassword = async data => {

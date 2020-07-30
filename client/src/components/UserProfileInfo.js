@@ -1,20 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Alert from './Alert';
 import { AuthContext } from '../contexts/AuthContext';
 
 const UserProfileInfo = () => {
-    const { state: { user }, changePassword, changeEmail, verifyPassword } = useContext(AuthContext);
+    const { state: { user, error }, changePassword, changeEmail, verifyPassword, clearError } = useContext(AuthContext);
     const [emailAlert, setEmailAlert] = useState({display: false, msg: '', color: ''});
     const [passwordAlert, setPasswordAlert] = useState({display: false, msg: '', color: ''});
     const [emailInfo, setEmailInfo] = useState({
         newEmail: '',
         confirmNewEmail: ''
-    })
+    });
     const [passwordInfo, setPasswordInfo] = useState({
         currentPassword: '',
         newPassword: '',
         confirmNewPassword: ''
     });
+    useEffect(() => {
+        if (error) { 
+            setEmailAlert({display: true, msg: 'Email already exists', color: 'bg-danger'});
+            setTimeout(() => setEmailAlert({display: false, msg: '', color: ''}), 4000);
+            clearError();
+        }
+        // eslint-disable-next-line
+    }, [error])
+
     const { currentPassword, newPassword, confirmNewPassword } = passwordInfo;
     const { newEmail, confirmNewEmail } = emailInfo;
 
@@ -28,6 +37,7 @@ const UserProfileInfo = () => {
             setEmailAlert({display: true, msg: 'Emails do not match', color: 'bg-danger'});
             setTimeout(() => setEmailAlert({display: false, msg: '', color: ''}), 4000);
         } else {
+            e.preventDefault();
             changeEmail({email: newEmail});
         }
         setEmailInfo({

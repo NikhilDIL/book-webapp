@@ -51,6 +51,11 @@ router.put('/:id', auth, async (req, res) => {
     const { email, password } = req.body;
     let data = {};
     try {
+        let userExists = await User.findOne({ email });
+        if (userExists) {
+            res.status(400).json({ msg: 'User already exists'});
+            return;
+        }
         if (email) {
             data.email = email;
         } else {

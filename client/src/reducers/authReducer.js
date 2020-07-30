@@ -16,6 +16,11 @@ export const authReducer = (state, action) => {
                 isAuthenticated: true,
                 loading: false
             }
+        case 'EMAIL_CHANGE_FAILURE':
+            return {
+                ...state,
+                error: action.payload
+            }
         case 'LOGIN_FAILURE':
         case 'REGISTER_FAILURE':
         case 'AUTH_ERROR':

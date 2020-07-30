@@ -35,8 +35,6 @@ const Register = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // check if email already exists
-        // add password == confirmPassword check
         if (password !== confirmPassword) {
             setRegisterAlert({display: true, msg: 'Passwords do not match', color: 'bg-danger'});
             setTimeout(() => setRegisterAlert({display: false, msg: '', color: ''}), 3000);
