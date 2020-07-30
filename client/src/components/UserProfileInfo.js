@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import Alert from './Alert';
 import { AuthContext } from '../contexts/AuthContext';
 
-const UserProfileInfo = () => {
+const UserProfileInfo = (props) => {
     const { state: { user, error }, changePassword, changeEmail, verifyPassword, clearError } = useContext(AuthContext);
     const [emailAlert, setEmailAlert] = useState({display: false, msg: '', color: ''});
     const [passwordAlert, setPasswordAlert] = useState({display: false, msg: '', color: ''});
@@ -39,8 +39,7 @@ const UserProfileInfo = () => {
         } else {
             e.preventDefault();
             changeEmail({email: newEmail});
-            setEmailAlert({display: true, msg: 'Email changed successfully', color: 'bg-success'});
-            setTimeout(() => setEmailAlert({display: false, msg: '', color: ''}), 4000);
+            window.location.reload(false);
         }
         setEmailInfo({
             newEmail: '',
