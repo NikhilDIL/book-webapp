@@ -14,6 +14,10 @@ const AuthState = (props) => {
         loading: true
     });
 
+    const clearError = () => {
+        dispatch({type: 'CLEAR_ERROR'});
+    }
+
     const verifyPassword = async data => {
         try {
             await axios.post('/api/auth', data, {
@@ -63,7 +67,7 @@ const AuthState = (props) => {
         } catch (err) {
             dispatch({
                 type: 'LOGIN_FAILURE',
-                payload: err.response.data.msg
+                payload: "Incorrect login information"
             });
         }
     }
@@ -103,7 +107,7 @@ const AuthState = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser, changePassword, changeEmail, verifyPassword }}>
+        <AuthContext.Provider value={{ state, registerUser, loadUser, loginUser, logoutUser, changePassword, changeEmail, verifyPassword, clearError }}>
           {props.children}
         </AuthContext.Provider>
     );

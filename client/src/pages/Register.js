@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Alert from '../components/Alert';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import '../css/register.css';
 
 const Register = (props) => {
     const authContext = useContext(AuthContext);
+    const [registerAlert, setRegisterAlert] = useState({display: false, msg: '', color: ''});
     const [registerInfo, setRegisterInfo] = useState({
         username: '',
         email: '',
@@ -13,14 +15,19 @@ const Register = (props) => {
     });
 
     const { username, email, password, confirmPassword } = registerInfo;
-    const { registerUser, state: { isAuthenticated } } =  authContext;
+    const { registerUser, clearError, state: { isAuthenticated, error } } =  authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
             props.history.push('/main');
         }
+        if (error) {
+            setRegisterAlert({display: true, msg: 'Email is already taken', color: 'bg-danger'});
+            setTimeout(() => setRegisterAlert({display: false, msg: '', color: ''}), 3000);
+            clearError();
+        }
         // eslint-disable-next-line
-    }, [isAuthenticated, props.history]);
+    }, [error, isAuthenticated, props.history]);
 
     const onChange = (e) => {
         setRegisterInfo({...registerInfo, [e.target.name]: e.target.value});
@@ -30,6 +37,11 @@ const Register = (props) => {
         e.preventDefault();
         // check if email already exists
         // add password == confirmPassword check
+        if (password !== confirmPassword) {
+            setRegisterAlert({display: true, msg: 'Passwords do not match', color: 'bg-danger'});
+            setTimeout(() => setRegisterAlert({display: false, msg: '', color: ''}), 3000);
+            return;
+        }
         registerUser({
             username,
             email,
@@ -48,6 +60,7 @@ const Register = (props) => {
             <h1 className="login-heading pt-5" style={{textAlign:"center"}}>My Book List</h1>
             <div className="mt-4" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <div className="test">
+                    <div align="center">{registerAlert.display && <Alert msg={registerAlert.msg} color={registerAlert.color}/>}</div>
                     <form onSubmit={onSubmit}>
                         <div className="col">
                             <div className="form-group mt-3">
@@ -58,6 +71,7 @@ const Register = (props) => {
                                         className="form-control" 
                                         placeholder="Username"
                                         onChange={onChange}
+                                        required
                                     />
                             </div>
                             <div className="form-group mt-3">
@@ -68,6 +82,7 @@ const Register = (props) => {
                                     className="form-control" 
                                     placeholder="Email"
                                     onChange={onChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
@@ -78,6 +93,8 @@ const Register = (props) => {
                                     className="form-control" 
                                     placeholder="Password"
                                     onChange={onChange}
+                                    required
+                                    minLength="6"
                                 />
                             </div>
                             <div className="form-group">
@@ -88,6 +105,8 @@ const Register = (props) => {
                                     className="form-control" 
                                     placeholder="Confirm Password"
                                     onChange={onChange}
+                                    required
+                                    minLength="6"
                                 />
                             </div>
                             <div>

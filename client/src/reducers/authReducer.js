@@ -29,6 +29,11 @@ export const authReducer = (state, action) => {
                 error: action.payload,
                 loading: false
             }
+        case 'CLEAR_ERROR':
+            return {
+                ...state,
+                error: null
+            }
         default:
           return state;
     }
