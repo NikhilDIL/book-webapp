@@ -9,6 +9,10 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
     const { state: { readingList, finishedList, favorites, filtered } } = useContext(BookListContext);
 
     useEffect(() => {
+        if (filtered !== null) {
+            setCurrentIndex(0);
+        }
+
         switch(booksType) {
             case 'readingList':
                 setDisplayList(readingList);
@@ -22,7 +26,7 @@ const AccountBooks = ({ booksType, currentIndex, setCurrentIndex }) => {
             default:
                 setDisplayList([]);
         }
-    }, [booksType, readingList, finishedList, favorites]);
+    }, [booksType, readingList, finishedList, favorites, filtered, setCurrentIndex]);
 
     const leftClick = e => {
         currentIndex === 0 ? setCurrentIndex(currentIndex) : setCurrentIndex(currentIndex-4);

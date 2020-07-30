@@ -39,6 +39,8 @@ const UserProfileInfo = () => {
         } else {
             e.preventDefault();
             changeEmail({email: newEmail});
+            setEmailAlert({display: true, msg: 'Email changed successfully', color: 'bg-success'});
+            setTimeout(() => setEmailAlert({display: false, msg: '', color: ''}), 4000);
         }
         setEmailInfo({
             newEmail: '',
@@ -83,7 +85,7 @@ const UserProfileInfo = () => {
             {emailAlert.display && <Alert msg={emailAlert.msg} color={emailAlert.color}/>}
             {passwordAlert.display && <Alert msg={passwordAlert.msg} color={passwordAlert.color}/>}
             
-            <div>
+            <div className="mt-1">
                 <h3>Change Email</h3>
                 <form onSubmit={onSubmitEmail}>
                     <div className="row">
